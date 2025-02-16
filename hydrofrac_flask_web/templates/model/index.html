@@ -4,52 +4,36 @@
 <div>
   <form method="post">
     <div class="mb-3">
-      <label for="selectGeometry" class="form-label">Select geometry</label>
-      <select class="form-select" aria-label="Select geometry" id="selectGeometry">
-        <option selected>KGD</option>
-        <option value="1">Radial</option>
-      </select>
-    </div>
-    <div class="mb-3">
-      <label for="selectRegime" class="form-label">Select propagation regime</label>
-      <select class="form-select" aria-label="Select regime" id="selectRegime">
-        <option selected>K</option>
-        <option value="1">M</option>
-        <option value="2">Kt</option>
-        <option value="3">Mt</option>
-      </select>
-    </div>
-    <div class="mb-3">
-      <label for="inputE" class="form-label">E</label>
-      <input type="number" class="form-control" id="inputE" name="inputE">
+      <label for="youngs_modulus" class="form-label">Young's modulus, GPa</label>
+      <input type="number" class="form-control" id="youngs_modulus" name="youngs_modulus" value="{{ youngs_modulus }}">
       <div id="inputEHelp" class="form-text"><a target="_blank" rel="noopener noreferrer"
           href="https://en.wikipedia.org/wiki/Young%27s_modulus">Young's modulus</a></div>
     </div>
     <div class="mb-3">
-      <label for="inputMu" class="form-label">Mu</label>
-      <input type="number" class="form-control" id="inputMu" name="inputMu">
+      <label for="fluid_viscosity" class="form-label">Fluid viscosity, Pa s</label>
+      <input type="number" step="any" class="form-control" id="fluid_viscosity" name="fluid_viscosity" value="{{ fluid_viscosity }}">
     </div>
     <div class="mb-3">
-      <label for="inputK" class="form-label">K</label>
-      <input type="number" class="form-control" id="inputK" name="inputK">
+      <label for="fracture_toughness" class="form-label">Fracture toughness, MPa*m^(1/2)</label>
+      <input type="number" class="form-control" id="fracture_toughness" name="fracture_toughness" value="{{ fracture_toughness }}">
     </div>
     <div class="mb-3">
-      <label for="inputQ" class="form-label">Q</label>
-      <input type="number" class="form-control" id="inputQ" name="inputQ">
+      <label for="fluid_injection_rate" class="form-label">Fluid injection rate, [m^3/s]*10^-3</label>
+      <input type="number" class="form-control" id="fluid_injection_rate" name="fluid_injection_rate" value="{{ fluid_injection_rate }}">
     </div>
     <div class="mb-3">
-      <label for="inputT" class="form-label">T</label>
-      <input type="number" class="form-control" id="inputT"  name="inputT">
+      <label for="time" class="form-label">Time, seconds</label>
+      <input type="number" class="form-control" id="time"  name="time" value="{{ time }}">
     </div>
     <div class="mb-3">
-      <label for="inputH" class="form-label">H</label>
-      <input type="number" class="form-control" id="inputH"  name="inputH">
+      <label for="fracture_height" class="form-label">Fracture height, m</label>
+      <input type="number" class="form-control" id="fracture_height"  name="fracture_height" value="{{ fracture_height }}">
     </div>
     <div class="mb-3">
-      <label for="inputCp" class="form-label">Cp</label>
-      <input type="number" class="form-control" id="inputCp"  name="inputCp">
+      <label for="porosity" class="form-label">Porosity</label>
+      <input type="number" class="form-control" id="porosity"  name="porosity" value="{{ porosity }}">
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Calculate</button>
   </form>
 </div>
 {% endblock %}

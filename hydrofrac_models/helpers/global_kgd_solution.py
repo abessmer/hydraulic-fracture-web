@@ -48,4 +48,4 @@ def global_kgd_solution(Ep, mup, Kp, Cp, Q0, t, N):
 
     eta = eff[2] # Index 3 in Matlab is index 2 in Python
 
-    return l, w, p, xi, eta
+    return l, w, p.flatten(), xi, eta

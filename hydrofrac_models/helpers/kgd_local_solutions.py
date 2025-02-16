@@ -16,7 +16,7 @@ def kgd_k_solution(Ep, mup, Kp, Cp, Q0, t, N):
     w = 0.6828 * (Kp**2 * Q0 * t / Ep**2)**(1/3) * (1 - xi**2)**(1/2)
     p = 0.1831 * (Kp**4 / Ep / Q0 / t)**(1/3) * np.ones(N)
 
-    return l, w, p, xi, eta
+    return l, w, p.flatten(), xi, eta
 
 
 def kgd_m_solution(Ep, mup, Kp, Cp, Q0, t, N):
@@ -35,7 +35,7 @@ def kgd_m_solution(Ep, mup, Kp, Cp, Q0, t, N):
     p = 2.7495 * (mup * Ep**2 / t)**(1/3) * \
         fcn_pres_cal(2/3, 0.588, xi, 1)
 
-    return l, w, p, xi, eta
+    return l, w, p.flatten(), xi, eta
 
 
 def kgd_kt_solution(Ep, mup, Kp, Cp, Q0, t, N):
@@ -53,7 +53,7 @@ def kgd_kt_solution(Ep, mup, Kp, Cp, Q0, t, N):
                   2)**(1/4) * (1 - xi**2)**(1/2)
     p = 0.3183 * (Kp**4 * Cp**2 / Q0**2 / t)**(1/4) * np.ones(N)
 
-    return l, w, p, xi, eta
+    return l, w, p.flatten(), xi, eta
 
 
 def kgd_mt_solution(Ep, mup, Kp, Cp, Q0, t, N):
@@ -72,4 +72,4 @@ def kgd_mt_solution(Ep, mup, Kp, Cp, Q0, t, N):
     p = 3.6783 * (Cp**2 * mup * Ep**3 / t / Q0)**(1 /
                                                   4) * fcn_pres_cal(5/8, 0.520, xi, 1)
 
-    return l, w, p, xi, eta
+    return l, w, p.flatten(), xi, eta

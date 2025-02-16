@@ -15,36 +15,128 @@ from highcharts_core.options.responsive import Responsive, ResponsiveRules, Cond
 from highcharts_core.constants import EnforcedNull
 import numpy as np
 
-def generate_js_script(x, y, container: str):
+
+def generate_width_chart_js_script(global_solution,
+                                   local_k_solution,
+                                   local_m_solution,
+                                   local_kt_solution,
+                                   local_mt_solution,
+                                   container: str):
     chart_options = HighchartsOptions(
-        title = Title(text = 'Fracture',
-                    align = 'left'),
-        y_axis = YAxis(title = YAxisTitle(text = 'Fracture width, mm')),
-        x_axis = XAxis(
-            title = AxisTitle(text = 'Coordinate, m'),
+        title=Title(text='Fracture width distribution',
+                    align='left'),
+        y_axis=YAxis(title=YAxisTitle(text='Fracture width, mm')),
+        x_axis=XAxis(
+            title=AxisTitle(text='Coordinate, m'),
         ),
-        legend = Legend(layout = 'vertical',
-                        align = 'right',
-                        vertical_align = 'middle'),
-        plot_options = PlotOptions(series = SeriesOptions(point_start = 2010,
-                                                        label = SeriesLabel(connector_allowed = False)))
+        legend=Legend(layout='vertical',
+                      align='right',
+                      vertical_align='middle'),
+        plot_options=PlotOptions(series=SeriesOptions(point_start=2010,
+                                                      label=SeriesLabel(connector_allowed=False)))
     )
 
-    override_options = HighchartsOptions(legend = Legend(layout = 'horizontal',
-                                                        align = 'center',
-                                                        vertical_align = 'bottom'))
+    override_options = HighchartsOptions(legend=Legend(layout='horizontal',
+                                                       align='center',
+                                                       vertical_align='bottom'))
     responsive_config = Responsive(
-        rules = [
-            ResponsiveRules(chart_options = override_options,
-                            condition = Condition(max_width = 500))
+        rules=[
+            ResponsiveRules(chart_options=override_options,
+                            condition=Condition(max_width=500))
         ]
     )
     chart_options.responsive = responsive_config
 
-    xy_array_stack = np.stack((x, y), axis=-1)
-    line_series = LineSeries.from_array(xy_array_stack)
-    line_series.name = 'Global solution'
-    chart_options.add_series(line_series)
+    global_line_series = LineSeries.from_array(np.stack(
+        (global_solution.normalized_coordinate, global_solution.normalized_width), axis=-1))
+    global_line_series.name = 'Global solution'
+    chart_options.add_series(global_line_series)
+
+    local_k_line_series = LineSeries.from_array(np.stack(
+        (local_k_solution.normalized_coordinate, local_k_solution.normalized_width), axis=-1))
+    local_k_line_series.name = 'Local K solution'
+    chart_options.add_series(local_k_line_series)
+
+    local_m_line_series = LineSeries.from_array(np.stack(
+        (local_m_solution.normalized_coordinate, local_m_solution.normalized_width), axis=-1))
+    local_m_line_series.name = 'Local M solution'
+    chart_options.add_series(local_m_line_series)
+
+    local_kt_line_series = LineSeries.from_array(np.stack(
+        (local_kt_solution.normalized_coordinate, local_kt_solution.normalized_width), axis=-1))
+    local_kt_line_series.name = 'Local Kt solution'
+    chart_options.add_series(local_kt_line_series)
+
+    local_mt_line_series = LineSeries.from_array(np.stack(
+        (local_mt_solution.normalized_coordinate, local_mt_solution.normalized_width), axis=-1))
+    local_mt_line_series.name = 'Local Mt solution'
+    chart_options.add_series(local_mt_line_series)
+
+    chart = Chart.from_options(chart_options)
+
+    chart.container = container
+
+    as_js_literal = chart.to_js_literal()
+
+    return as_js_literal
+
+
+def generate_pressure_chart_js_script(global_solution,
+                                      local_k_solution,
+                                      local_m_solution,
+                                      local_kt_solution,
+                                      local_mt_solution,
+                                      container: str):
+    chart_options = HighchartsOptions(
+        title=Title(text='Fluid pressure distribution',
+                    align='left'),
+        y_axis=YAxis(title=YAxisTitle(text='Fluid pressure, Pa')),
+        x_axis=XAxis(
+            title=AxisTitle(text='Coordinate, m'),
+        ),
+        legend=Legend(layout='vertical',
+                      align='right',
+                      vertical_align='middle'),
+        plot_options=PlotOptions(series=SeriesOptions(point_start=2010,
+                                                      label=SeriesLabel(connector_allowed=False)))
+    )
+
+    override_options = HighchartsOptions(legend=Legend(layout='horizontal',
+                                                       align='center',
+                                                       vertical_align='bottom'))
+    responsive_config = Responsive(
+        rules=[
+            ResponsiveRules(chart_options=override_options,
+                            condition=Condition(max_width=500))
+        ]
+    )
+    chart_options.responsive = responsive_config
+
+    global_line_series = LineSeries.from_array(np.stack(
+        (global_solution.normalized_coordinate, global_solution.normalized_pressure), axis=-1))
+    global_line_series.name = 'Global solution'
+    chart_options.add_series(global_line_series)
+
+    local_k_line_series = LineSeries.from_array(np.stack(
+        (local_k_solution.normalized_coordinate, local_k_solution.normalized_pressure), axis=-1))
+    local_k_line_series.name = 'Local K solution'
+    chart_options.add_series(local_k_line_series)
+
+    local_m_line_series = LineSeries.from_array(np.stack(
+        (local_m_solution.normalized_coordinate, local_m_solution.normalized_pressure), axis=-1))
+    local_m_line_series.name = 'Local M solution'
+    chart_options.add_series(local_m_line_series)
+
+    local_kt_line_series = LineSeries.from_array(np.stack(
+        (local_kt_solution.normalized_coordinate, local_kt_solution.normalized_pressure), axis=-1))
+    local_kt_line_series.name = 'Local Kt solution'
+    chart_options.add_series(local_kt_line_series)
+
+    local_mt_line_series = LineSeries.from_array(np.stack(
+        (local_mt_solution.normalized_coordinate, local_mt_solution.normalized_pressure), axis=-1))
+    local_mt_line_series.name = 'Local Mt solution'
+    chart_options.add_series(local_mt_line_series)
+
     chart = Chart.from_options(chart_options)
 
     chart.container = container
