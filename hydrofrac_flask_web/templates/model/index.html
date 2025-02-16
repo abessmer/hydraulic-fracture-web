@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block input_top_left %}
+<div>
+  <form method="post">
+    <div class="mb-3">
+      <label for="selectGeometry" class="form-label">Select geometry</label>
+      <select class="form-select" aria-label="Select geometry" id="selectGeometry">
+        <option selected>KGD</option>
+        <option value="1">Radial</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="selectRegime" class="form-label">Select propagation regime</label>
+      <select class="form-select" aria-label="Select regime" id="selectRegime">
+        <option selected>K</option>
+        <option value="1">M</option>
+        <option value="2">Kt</option>
+        <option value="3">Mt</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="inputE" class="form-label">E</label>
+      <input type="number" class="form-control" id="inputE" name="inputE">
+      <div id="inputEHelp" class="form-text"><a target="_blank" rel="noopener noreferrer"
+          href="https://en.wikipedia.org/wiki/Young%27s_modulus">Young's modulus</a></div>
+    </div>
+    <div class="mb-3">
+      <label for="inputMu" class="form-label">Mu</label>
+      <input type="number" class="form-control" id="inputMu" name="inputMu">
+    </div>
+    <div class="mb-3">
+      <label for="inputK" class="form-label">K</label>
+      <input type="number" class="form-control" id="inputK" name="inputK">
+    </div>
+    <div class="mb-3">
+      <label for="inputQ" class="form-label">Q</label>
+      <input type="number" class="form-control" id="inputQ" name="inputQ">
+    </div>
+    <div class="mb-3">
+      <label for="inputT" class="form-label">T</label>
+      <input type="number" class="form-control" id="inputT"  name="inputT">
+    </div>
+    <div class="mb-3">
+      <label for="inputH" class="form-label">H</label>
+      <input type="number" class="form-control" id="inputH"  name="inputH">
+    </div>
+    <div class="mb-3">
+      <label for="inputCp" class="form-label">Cp</label>
+      <input type="number" class="form-control" id="inputCp"  name="inputCp">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+<div>
+  <p>plot</p>
+</div>
+{% endblock %}
+
+{% block plot_top_right %}
+<div>
+  <p>
+    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+  <div id="top_right_chart">
+  </div>
+  <script type="text/javascript">{{ top_right_chart | safe }}</script>
+  </p>
+</div>
+{% endblock %}
+
+{% block plot_bottom_left %}
+<div>
+  <p>
+    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+  <div id="bottom_left_chart">
+  </div>
+  <script type="text/javascript">{{ bottom_left_chart | safe }}</script>
+  </p>
+</div>
+{% endblock %}
+
+{% block plot_bottom_center %}
+<div>
+  <p>
+    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+  <div id="bottom_center_chart">
+  </div>
+  <script type="text/javascript">{{ bottom_center_chart | safe }}</script>
+  </p>
+</div>
+{% endblock %}
+
+{% block plot_bottom_right %}
+<div>
+  <p>
+    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+  <div id="bottom_right_chart">
+  </div>
+  <script type="text/javascript">{{ bottom_right_chart | safe }}</script>
+  </p>
+</div>
+{% endblock %}
