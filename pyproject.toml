@@ -1,0 +1,14 @@
+[project]
+name = "hydraulic-fracture-web"
+version = "0.0.1"
+description = "Hydraulic fracture model prototype"
+dependencies = [
+    "flask",
+    "numpy",
+    "scipy",
+    "highcharts-core",
+]
+
+[build-system]
+requires = ["flit_core<4"]
+build-backend = "flit_core.buildapi"
