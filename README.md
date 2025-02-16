@@ -8,6 +8,10 @@ This project provides a web interface for calculating and visualizing hydraulic 
 * Compares global and local solutions for different propagation regimes (K, M, Kt, Mt).
 * Interactive plots for visualizing results.
 
+## Live Demo
+
+A live demo of the application can be found [here](https://hydraulic-fracture-web-159963514707.us-east1.run.app).
+
 ## Getting Started
 
 ### Prerequisites
