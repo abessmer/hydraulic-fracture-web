@@ -3,11 +3,19 @@ from flask import (
 )
 from werkzeug.exceptions import abort
 
+from hydrofrac_models.material_parameters import MaterialParameters
+from hydrofrac_models.kgd_fracture import KgdFracture
+from . import plot
+
+
 bp = Blueprint('model', __name__)
 
 
 @bp.route('/', methods=('GET', 'POST'))
 def index():
+    top_right_chart = ''
+    bottom_right_chart = ''
+
     if request.method == 'POST':
         e = request.form['inputE']
         mu = request.form['inputMu']
@@ -17,33 +25,22 @@ def index():
         t = request.form['inputT']
         cp = request.form['inputCp']
 
-    from . import plot
 
-    top_right_chart = '''
-    document.addEventListener('DOMContentLoaded', function() {
-    Highcharts.chart('top_right_chart',
-    {
-    series: [{
-    type: 'line'
-    }]
-    },
-    );
-    });
-'''
-    bottom_left_chart = '''
-    document.addEventListener('DOMContentLoaded', function() {
-    Highcharts.chart('bottom_left_chart',
-    {
-    series: [{
-    type: 'line'
-    }]
-    },
-    );
-    });
-'''
+        params = MaterialParameters.get_k_regime()
+
+        frac = KgdFracture(params)
+        frac_solution = frac.calculate_local_solution(100, 'K')
+
+        top_right_chart = plot.generate_js_script(
+            frac_solution.normalized_coordinate, 
+            frac_solution.normalized_width, 
+            'top_right_chart')
+
+
+
     return render_template('model/index.html',
                            top_right_chart=top_right_chart,
-                           bottom_left_chart=bottom_left_chart)
+                           bottom_right_chart=bottom_right_chart)
 
 
 @bp.route('/create', methods=('GET', 'POST'))

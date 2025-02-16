@@ -20,13 +20,17 @@
                 {% block input_top_left %}{% endblock %}
             </div>
             <div class="col-lg">
-                {% block plot_top_right %}{% endblock %}
+                <div class="row">
+                    <div class="col">
+                        {% block plot_top_right %}{% endblock %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        {% block plot_bottom_right %}{% endblock %}
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col">{% block plot_bottom_left %}{% endblock %}</div>
-            <div class="col">{% block plot_bottom_center %}{% endblock %}</div>
-            <div class="col">{% block plot_bottom_right %}{% endblock %}</div>
         </div>
     </div>
 
